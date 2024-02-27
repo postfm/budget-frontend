@@ -6,7 +6,12 @@ import TransactionsPage from '../pages/transactions-page';
 import CategoriesPage from '../pages/categories-page';
 import AuthPage from '../pages/auth-page';
 import ProtectedRoute from '../components/protected-route';
-import { categoriesAction, categoriesLoader } from '../helpers/route.helpers';
+import {
+  categoriesAction,
+  categoriesLoader,
+  transactionsAction,
+  transactionsLoader,
+} from '../helpers/route.helpers';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +25,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'transactions',
+        action: transactionsAction,
+        loader: transactionsLoader,
         element: (
           <ProtectedRoute>
             <TransactionsPage />

@@ -27,5 +27,20 @@ export interface CategoryInterface {
   id: number;
   createdAt: string;
   updatedAt: string;
-  transactions: [];
+  transactions?: [];
+}
+
+export interface TransactionInterface {
+  amount: number;
+  createdAt: string;
+  updatedAt: string;
+  title: string;
+  type: string;
+  id: number;
+  category: CategoryInterface;
+}
+
+export interface ResponseTransactionLoaderInterface {
+  categories: CategoryInterface[];
+  transactions: TransactionInterface[];
 }

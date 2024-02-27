@@ -18,6 +18,7 @@ const CategoryModal = ({ type, id, setVisibleModal }: CategoryModalProps): JSX.E
         <label htmlFor='title'>
           <small>Category Title</small>
           <input
+            id='title'
             className='input w-full'
             type='text'
             name='title'

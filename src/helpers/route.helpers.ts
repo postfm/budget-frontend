@@ -1,5 +1,6 @@
+import { toast } from 'react-toastify';
 import { instance } from '../api/axios.api';
-import { CategoryInterface } from '../types/types';
+import { CategoryInterface, TransactionInterface } from '../types/types';
 
 export const categoriesAction = async ({ request }: any) => {
   switch (request.method) {
@@ -31,5 +32,41 @@ export const categoriesAction = async ({ request }: any) => {
 
 export const categoriesLoader = async (): Promise<CategoryInterface[]> => {
   const { data } = await instance.get<CategoryInterface[]>('/categories');
+  return data;
+};
+
+export const transactionsAction = async ({ request }: any) => {
+  switch (request.method) {
+    case 'POST': {
+      const formData = await request.formData();
+      const newTransaction = {
+        title: formData.get('title'),
+        amount: +formData.get('amount'),
+        category: { id: formData.get('category') },
+        type: formData.get('type'),
+      };
+
+      await instance.post('/transactions', newTransaction);
+      toast.success('Transaction added.');
+      return null;
+    }
+    case 'DELETE': {
+      const formData = await request.formData();
+      const transactionId = formData.get('id');
+      await instance.delete(`transactions/transaction/${transactionId}`);
+      toast.success('Transaction is deleted');
+      return null;
+    }
+  }
+};
+
+export const transactionsLoader = async () => {
+  const categories = await instance.get<CategoryInterface[]>('/categories');
+  const transactions = await instance.get<TransactionInterface[]>('/transactions');
+
+  const data = {
+    categories: categories.data,
+    transactions: transactions.data,
+  };
   return data;
 };
