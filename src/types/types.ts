@@ -43,4 +43,6 @@ export interface TransactionInterface {
 export interface ResponseTransactionLoaderInterface {
   categories: CategoryInterface[];
   transactions: TransactionInterface[];
+  totalIncome: number;
+  totalExpense: number;
 }

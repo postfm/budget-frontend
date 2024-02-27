@@ -63,10 +63,14 @@ export const transactionsAction = async ({ request }: any) => {
 export const transactionsLoader = async () => {
   const categories = await instance.get<CategoryInterface[]>('/categories');
   const transactions = await instance.get<TransactionInterface[]>('/transactions');
+  const totalIncome = await instance.get<number>('/transactions/income/find');
+  const totalExpense = await instance.get<number>('/transactions/expense/find');
 
   const data = {
     categories: categories.data,
     transactions: transactions.data,
+    totalIncome: totalIncome.data,
+    totalExpense: totalExpense.data,
   };
   return data;
 };
