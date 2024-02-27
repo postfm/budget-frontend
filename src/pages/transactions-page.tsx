@@ -24,7 +24,7 @@ const TransactionsPage = (): JSX.Element => {
         </div>
       </div>
 
-      <TransactionTable />
+      <TransactionTable limit={5} />
     </>
   );
 };
